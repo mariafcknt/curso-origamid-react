@@ -28,23 +28,24 @@ const mario = {
   ativa: false,
 };
 
-  let total = 0;
-
-function calcularTotalGasto(total, item) {
-  const preco = +item.preco.replace('R$ ', '')
-  return total += preco
-}
-
 const App = () => {
   const dados = luana;
-  const totalGasto = dados.compras.reduce(calcularTotalGasto, 0);
+  const total = dados.compras
+    .map((item) => Number(item.preco.replace("R$ ", "")))
+    .reduce((acc, atual) => acc + atual);
 
   return (
     <div>
       <p>Nome: {dados.cliente}</p>
       <p>Idade: {dados.idade}</p>
-      <p>Situação: {dados.ativa ? "Ativo" : "Inativa"}</p>
-      <p>{totalGasto}</p>
+      <p>
+        Situação:{" "}
+        <span style={{ color: dados.ativa ? "green" : "red" }}>
+          {dados.ativa ? "Ativa" : "Inativa"}
+        </span>
+      </p>
+      <p>Total gasto: R$ {total}</p>
+      {total > 10000 && <p>Você está gastando muito.</p>}
     </div>
   );
 };
