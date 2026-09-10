@@ -1,11 +1,11 @@
 import React from "react";
 
-function Input() {
+function Input({ label, id, ...props }) {
   return (
-    <>
-      <label htmlFor=""></label>
-      <input type="text" />
-    </>
+    <div style={{ margin: "1rem 0" }}>
+      <label htmlFor={id}>{label}</label>
+      <input id={id} type="text" {...props} />
+    </div>
   );
 }
 

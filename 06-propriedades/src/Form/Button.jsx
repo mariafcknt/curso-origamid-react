@@ -1,6 +1,7 @@
 import React from "react";
 
-function Button() {
+function Button(props) {
+  console.log(props);
   return <button>Clique</button>;
 }
 

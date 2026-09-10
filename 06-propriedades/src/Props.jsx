@@ -1,5 +1,18 @@
 import React from "react";
 
+// const Titulo = ({ cor, texto }) => {
+//   return <h1 style={{ color: cor }}>{texto}</h1>;
+// };
+
+// function App() {
+//   return (
+//     <div>
+//       <Titulo cor="red" texto="Título 1"></Titulo>
+//       <Titulo cor="blue" texto="Título 2"></Titulo>
+//     </div>
+//   );
+// }
+
 const Titulo = ({ cor, texto, children }) => {
   return (
     <h1 style={{ color: cor }}>
