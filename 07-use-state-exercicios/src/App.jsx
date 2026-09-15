@@ -3,13 +3,16 @@ import Produto from './Produto'
 
 function App() {
   const [produtos, setProdutos] = React.useState(null)
+  const [status, setStatus] = React.useState(null)
 
   async function fetchProduto(produtoUrl) {
-    let status = 'loading'
+    setStatus('loading')
     const dadosResponse = await fetch(produtoUrl)
     const dadosJSON = await dadosResponse.json()
     setProdutos(dadosJSON)
+    setStatus('done')
   }
+
   return (
     <div>
       <div style={{ display: 'flex', gap: '1rem' }}>
