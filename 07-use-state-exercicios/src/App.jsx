@@ -2,53 +2,27 @@ import React from 'react'
 import Produto from './Produto'
 
 function App() {
-  const [produtos, setProdutos] = React.useState(null)
-  const [status, setStatus] = React.useState(null)
+  const [dados, setDados] = React.useState(null)
+  const [loading, setLoading] = React.useState(null)
 
-  async function fetchProduto(produtoUrl) {
-    setStatus('loading')
-    const dadosResponse = await fetch(produtoUrl)
-    const dadosJSON = await dadosResponse.json()
-    setProdutos(dadosJSON)
-    setStatus('done')
+  async function handleClick(event) {
+    const url = `https://ranekapi.origamid.dev/json/api/produto/${event.target.innerText}`
+    setLoading(true)
+    const dadosResponse = await fetch(url)
+    const json = await dadosResponse.json()
+    setDados(json)
+    setLoading(false)
   }
 
   return (
     <div>
       <div style={{ display: 'flex', gap: '1rem' }}>
-        <button
-          onClick={() =>
-            fetchProduto(
-              'https://ranekapi.origamid.dev/json/api/produto/notebook'
-            )
-          }
-        >
-          notebook
-        </button>
-        <button
-          onClick={() =>
-            fetchProduto(
-              'https://ranekapi.origamid.dev/json/api/produto/smartphone'
-            )
-          }
-        >
-          smartphone
-        </button>
-        <button
-          onClick={() =>
-            fetchProduto(
-              'https://ranekapi.origamid.dev/json/api/produto/tablet'
-            )
-          }
-        >
-          tablet
-        </button>
+        <button onClick={handleClick}>notebook</button>
+        <button onClick={handleClick}>smartphone</button>
+        <button onClick={handleClick}>tablet</button>
       </div>
-      {produtos ? (
-        <Produto produtos={produtos} setProdutos={setProdutos} />
-      ) : (
-        <p>Carregando...</p>
-      )}
+      {loading && <p>Carregando...</p>}
+      {dados && !loading && <Produto dados={dados} setDados={setDados} />}
     </div>
   )
 }
