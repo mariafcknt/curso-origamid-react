@@ -12,7 +12,6 @@ function App() {
     timeoutRef.current = setTimeout(() => {
       setNotificacao(null)
     }, 2000)
-    console.log(timeoutRef)
   }
   return (
     <div>
