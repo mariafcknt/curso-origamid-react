@@ -5,6 +5,8 @@ export const GlobalContext = React.createContext()
 export const GlobalStorage = ({ children }) => {
   const [dados, setDados] = React.useState(null)
 
+  // na resolução do exercício o Origamid colocou o fetch dos dados aqui
+
   function limparDados() {
     setDados(null)
   }

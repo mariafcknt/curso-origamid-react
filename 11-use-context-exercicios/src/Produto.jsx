@@ -2,7 +2,7 @@ import React from 'react'
 import GlobalContext from './GlobalContext'
 
 function Produto() {
-  let global = React.useContext(GlobalContext)
+  const global = React.useContext(GlobalContext)
 
   function fetchDados() {
     fetch('https://ranekapi.origamid.dev/json/api/produto/')
@@ -24,7 +24,11 @@ function Produto() {
       </p>
       {global.dados
         ? global.dados.map((item) => {
-            return <p key={item.id}>{item.nome}</p>
+            return (
+              <li key={item.id} style={{ marginLeft: '1rem' }}>
+                {item.nome}
+              </li>
+            )
           })
         : null}
       <button onClick={global.dados ? global.limparDados : () => fetchDados()}>
