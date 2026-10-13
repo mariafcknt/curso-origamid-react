@@ -18,15 +18,27 @@ import React from 'react'
 
 function App() {
   const [form, setForm] = React.useState({})
+  const [post, setPost] = React.useState(null)
 
   function handleSubmit(event) {
     event.preventDefault()
-    console.log(event)
+    setPost(null)
+    fetch('https://ranekapi.origamid.dev/json/api/usuario', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      // form é o objeto com os dados do formulário
+      body: JSON.stringify(form),
+    })
+      .then((response) => response.json())
+      .then((json) =>
+        json.data.status == 200 ? setPost(true) : console.log('error')
+      )
   }
 
   function handleChange({ target }) {
     const { id, value } = target
-    console.log(form)
     setForm({ ...form, [id]: value })
   }
 
@@ -96,7 +108,12 @@ function App() {
         value={form.estado}
         onChange={handleChange}
       />
-      <button>Enviar</button>
+      <button onClick={handleSubmit}>Enviar</button>
+      {post ? (
+        <p>Dados enviados com sucesso</p>
+      ) : (
+        <p>Erro ao enviar dados. Tente novamente</p>
+      )}
     </form>
   )
 }
