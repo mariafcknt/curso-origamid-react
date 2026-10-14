@@ -16,13 +16,67 @@ import React from 'react'
 
 // Mostre uma mensagem na tela, caso a resposta da API seja positiva
 
+const formFields = [
+  {
+    id: 'nome',
+    label: 'Nome',
+    type: 'text',
+  },
+  {
+    id: 'email',
+    label: 'Email',
+    type: 'email',
+  },
+  {
+    id: 'senha',
+    label: 'Senha',
+    type: 'password',
+  },
+  {
+    id: 'cep',
+    label: 'CEP',
+    type: 'number',
+  },
+  {
+    id: 'rua',
+    label: 'Rua',
+    type: 'text',
+  },
+  {
+    id: 'numero',
+    label: 'Número',
+    type: 'number',
+  },
+  {
+    id: 'bairro',
+    label: 'Bairro',
+    type: 'text',
+  },
+  {
+    id: 'cidade',
+    label: 'Cidade',
+    type: 'text',
+  },
+  {
+    id: 'estado',
+    label: 'Estado',
+    type: 'text',
+  },
+]
+
 function App() {
-  const [form, setForm] = React.useState({})
-  const [post, setPost] = React.useState(null)
+  const [form, setForm] = React.useState(
+    formFields.reduce((acc, field) => {
+      return {
+        ...acc,
+        [field.id]: '',
+      }
+    }, {})
+  )
+  const [response, setResponse] = React.useState(null)
 
   function handleSubmit(event) {
     event.preventDefault()
-    setPost(null)
     fetch('https://ranekapi.origamid.dev/json/api/usuario', {
       method: 'POST',
       headers: {
@@ -30,90 +84,27 @@ function App() {
       },
       // form é o objeto com os dados do formulário
       body: JSON.stringify(form),
+    }).then((response) => {
+      setResponse(response)
     })
-      .then((response) => response.json())
-      .then((json) =>
-        json.data.status == 200 ? setPost(true) : console.log('error')
-      )
   }
 
   function handleChange({ target }) {
+    setResponse(null)
     const { id, value } = target
     setForm({ ...form, [id]: value })
   }
 
   return (
     <form onSubmit={handleSubmit}>
-      <label htmlFor="nome">Nome</label>
-      <input
-        id="nome"
-        type="text"
-        name="nome"
-        value={form.nome}
-        onChange={handleChange}
-      />
-      <label htmlFor="email">Email</label>
-      <input
-        id="email"
-        type="email"
-        name="email"
-        value={form.email}
-        onChange={handleChange}
-      />
-      <label htmlFor="senha">Senha</label>
-      <input
-        id="senha"
-        type="password"
-        name="senha"
-        value={form.senha}
-        onChange={handleChange}
-      />
-      <label htmlFor="cep">CEP</label>
-      <input
-        id="cep"
-        type="number"
-        name="cep"
-        value={form.cep}
-        onChange={handleChange}
-      />
-      <label htmlFor="rua">Rua</label>
-      <input
-        id="rua"
-        type="text"
-        name="rua"
-        value={form.rua}
-        onChange={handleChange}
-      />
-      <label htmlFor="bairro">Bairro</label>
-      <input
-        id="bairro"
-        type="text"
-        name="bairro"
-        value={form.bairro}
-        onChange={handleChange}
-      />
-      <label htmlFor="cidade">Cidade</label>
-      <input
-        id="cidade"
-        type="text"
-        name="cidade"
-        value={form.cidade}
-        onChange={handleChange}
-      />
-      <label htmlFor="estado">Estado</label>
-      <input
-        id="estado"
-        type="text"
-        name="estado"
-        value={form.estado}
-        onChange={handleChange}
-      />
+      {formFields.map(({ id, label, type }) => (
+        <div key={id}>
+          <label htmlFor={id}>{label}</label>
+          <input type={type} id={id} value={form[id]} onChange={handleChange} />
+        </div>
+      ))}
+      {response && response.ok && <p>Dados enviados com sucesso</p>}
       <button onClick={handleSubmit}>Enviar</button>
-      {post ? (
-        <p>Dados enviados com sucesso</p>
-      ) : (
-        <p>Erro ao enviar dados. Tente novamente</p>
-      )}
     </form>
   )
 }
