@@ -1,9 +1,11 @@
 import React from 'react'
 import Input from './Form/Input'
+import Select from './Form/Select'
 
 function App() {
   const [nome, setNome] = React.useState('')
   const [email, setEmail] = React.useState('')
+  const [produto, setProduto] = React.useState('')
 
   return (
     <form>
@@ -16,6 +18,12 @@ function App() {
         required
       />
       <button>Enviar</button>
+      <br></br>
+      <Select
+        options={['smartphone', 'tablet']}
+        value={produto}
+        setValue={setProduto}
+      />
     </form>
   )
 }
