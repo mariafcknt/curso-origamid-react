@@ -3,53 +3,36 @@ import Input from './Form/Input'
 import Select from './Form/Select'
 import Radio from './Form/Radio'
 import Checkbox from './Form/Checkbox'
+import useForm from './Hooks/useForm'
 
 function App() {
-  const [nome, setNome] = React.useState('')
-  const [email, setEmail] = React.useState('')
-  const [produto, setProduto] = React.useState('')
-  const [cor, setCor] = React.useState('Azul')
-  const [frutas, setFrutas] = React.useState('Uva')
-  const [linguagens, setLinguagens] = React.useState([])
-  const [termos, setTermos] = React.useState([])
+  const cep = useForm('cep')
+  const email = useForm('email')
+  const nome = useForm()
+  const sobrenome = useForm(false)
+
+  function handleSubmit(event) {
+    event.preventDefault()
+    if (cep.validate() && email.validate() && nome.validate()) {
+      console.log('enviou')
+    } else {
+      console.log('não enviar')
+    }
+  }
 
   return (
-    <form>
-      <Input id="nome" label="Nome" value={nome} setValue={setNome} />
+    <form onSubmit={handleSubmit}>
+      <Input type="text" label="Nome" id="nome" {...nome} />
+      <Input type="text" label="Sobrenome" id="sobrenome" {...sobrenome} />
       <Input
-        id="email"
-        label="Email"
-        value={email}
-        setValue={setEmail}
-        required
+        type="text"
+        label="CEP"
+        id="cep"
+        placeholder="00000-000"
+        {...cep}
       />
+      <Input type="email" label="Email" id="email" {...email} />
       <button>Enviar</button>
-      <p></p>
-      <Select
-        options={['smartphone', 'tablet']}
-        value={produto}
-        setValue={setProduto}
-      />
-      <h2>Cores</h2>
-      <Radio options={['Azul', 'Vermelho']} value={cor} setValue={setCor} />
-      <h2>Frutas</h2>
-      <Radio
-        options={['Limão', 'Laranja', 'Uva']}
-        value={frutas}
-        setValue={setFrutas}
-      />
-      <h2>Checkbox</h2>
-      <Checkbox
-        options={['JavaScript', 'PHP', 'Ruby']}
-        value={linguagens}
-        setValue={setLinguagens}
-      />
-      <h2>Termos</h2>
-      <Checkbox
-        options={['Li e aceito os termos']}
-        value={termos}
-        setValue={setTermos}
-      />
     </form>
   )
 }
