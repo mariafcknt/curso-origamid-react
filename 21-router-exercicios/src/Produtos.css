@@ -1,0 +1,17 @@
+.produtos-container {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1.5rem;
+}
+
+.produto-img {
+  width: 100%;
+  aspect-ratio: 3 / 4;
+  object-fit: cover;
+  display: block;
+  border-radius: 12px;
+}
+
+.produto-title {
+  overflow-wrap: anywhere;
+}

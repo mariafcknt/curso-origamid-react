@@ -6,6 +6,9 @@ import Header from './Header'
 import NotFound from './NotFound'
 import Login from './Login'
 import Produto from './Produto'
+import ProdutoCustomizado from './ProdutoCustomizado'
+import ProdutoDescricao from './ProdutoDescricao'
+import ProdutoAvaliacao from './ProdutoAvaliacao'
 
 function App() {
   return (
@@ -16,7 +19,11 @@ function App() {
         <Route path="sobre" element={<Sobre />}></Route>
         <Route path="login" element={<Login />}></Route>
         <Route path="*" element={<NotFound />}></Route>
-        <Route path="produto/:id/*" element={<Produto />}></Route>
+        <Route path="produto/:id/" element={<Produto />}>
+          <Route index element={<ProdutoDescricao />} />
+          <Route path="avaliacao" element={<ProdutoAvaliacao />} />
+          <Route path="customizado" element={<ProdutoCustomizado />} />
+        </Route>
       </Routes>
     </BrowserRouter>
   )

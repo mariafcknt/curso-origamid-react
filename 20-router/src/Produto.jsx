@@ -5,16 +5,14 @@ import {
   useLocation,
   useParams,
   NavLink,
+  Outlet,
 } from 'react-router-dom'
-import ProdutoCustomizado from './ProdutoCustomizado'
-import ProdutoDescricao from './ProdutoDescricao'
-import ProdutoAvaliacao from './ProdutoAvaliacao'
 
 function Produto() {
   const params = useParams()
   const location = useLocation()
   const search = new URLSearchParams(location.search)
-  console.log(search.get('cor'))
+  // console.log(search.get('cor'))
 
   return (
     <div>
@@ -24,11 +22,12 @@ function Produto() {
         <NavLink to="avaliacao">Avaliação</NavLink>{' '}
         <NavLink to="customizado">Customizado</NavLink>
       </nav>
-      <Routes>
+      <Outlet />
+      {/* <Routes>
         <Route path="/" element={<ProdutoDescricao />} />
         <Route path="avaliacao" element={<ProdutoAvaliacao />} />
         <Route path="customizado" element={<ProdutoCustomizado />} />
-      </Routes>
+      </Routes> */}
     </div>
   )
 }
