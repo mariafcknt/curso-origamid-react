@@ -1,9 +1,9 @@
 import React from 'react'
-import './Produtos.css'
-import Header from './Header'
+import './style/Home.css'
+import { NavLink } from 'react-router-dom'
 
 function Produtos() {
-  const [produtos, setProdutos] = React.useState()
+  const [produtos, setProdutos] = React.useState(null)
 
   React.useEffect(() => {
     fetch('https://ranekapi.origamid.dev/json/api/produto')
@@ -13,16 +13,17 @@ function Produtos() {
       })
   }, [])
 
+  if (produtos === null) return <p>Carregando...</p>
+
   return (
     <div>
-      <Header />
       <div className="produtos-container">
         {produtos.map((p) => (
-          <div className="produto-card">
+          <NavLink key={p.id} className="produto-card" to={'produto/' + p.id}>
             {' '}
-            <h3 className="produto-title">{p.nome}</h3>
             <img className="produto-img" src={p.fotos[0].src} />
-          </div>
+            <h3 className="produto-title">{p.nome}</h3>
+          </NavLink>
         ))}
       </div>
     </div>
