@@ -1,0 +1,24 @@
+.main-content {
+  display: grid;
+  grid-template-columns: 50% 50%;
+  gap: 2rem;
+}
+
+.fotos-container {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.foto {
+  border-radius: 8px;
+}
+
+.preco {
+  color: #057500;
+  background-color: #86fa54;
+  padding: 4px 8px;
+  width: fit-content;
+  border-radius: 4px;
+  font-size: medium;
+}

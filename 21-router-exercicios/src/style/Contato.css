@@ -1,0 +1,21 @@
+.main-content {
+  display: grid;
+  grid-template-columns: 50% 50%;
+  gap: 2rem;
+}
+
+.foto {
+  border-radius: 8px;
+  max-width: 100%;
+}
+
+.info-list {
+  list-style-type: '— ';
+  padding-left: 1.2rem;
+}
+
+.info-list li::marker {
+  top: 1em;
+  color: #d8d8d8;
+  font-weight: bold;
+}

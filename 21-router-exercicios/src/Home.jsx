@@ -1,5 +1,6 @@
 import React from 'react'
 import './style/Home.css'
+import './style/Main.css'
 import { NavLink } from 'react-router-dom'
 
 function Produtos() {
@@ -10,10 +11,11 @@ function Produtos() {
       .then((response) => response.json())
       .then((produtos) => {
         setProdutos(produtos)
+        document.title = 'Ranek'
       })
   }, [])
 
-  if (produtos === null) return <p>Carregando...</p>
+  if (produtos === null) return <p className="loading"></p>
 
   return (
     <div>
@@ -26,6 +28,7 @@ function Produtos() {
           </NavLink>
         ))}
       </div>
+      <p>Alguns direitos reservados</p>
     </div>
   )
 }
