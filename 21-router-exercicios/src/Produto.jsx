@@ -20,7 +20,7 @@ function Produto() {
 
   if (produto === null) return <p className="loading"></p>
   return (
-    <div>
+    <div className="animeLeft">
       <div className="main-content">
         <div className="fotos-container">
           {fotos !== null
@@ -38,6 +38,7 @@ function Produto() {
           <p>{produto.descricao}</p>
         </div>
       </div>
+      <p className="footer">Alguns direitos reservados.</p>
     </div>
   )
 }

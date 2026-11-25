@@ -4,7 +4,7 @@ import './style/Contato.css'
 
 function Contato() {
   return (
-    <div>
+    <div className="animeLeft">
       <title>Ranek | Contato</title>
       <div className="main-content">
         <img className="foto" src="src\img\contato.jpg" alt="" />
@@ -17,6 +17,7 @@ function Contato() {
           </ul>
         </div>
       </div>
+      <p className="footer">Alguns direitos reservados.</p>
     </div>
   )
 }

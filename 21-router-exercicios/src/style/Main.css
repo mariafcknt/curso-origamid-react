@@ -1,6 +1,8 @@
 html {
   align-content: center;
   margin: 0 20%;
+  min-height: 110vh;
+  align-content: baseline;
 }
 
 @media (max-width: 768px) {
@@ -9,15 +11,34 @@ html {
   }
 }
 
+.footer {
+  font-size: medium;
+  color: #a9a9a9;
+  text-align: center;
+  margin-top: 20%;
+}
+
 .loading {
   margin: auto;
   border: 10px solid #f3f3f3;
   border-top: 10px solid #dcdcdc;
-  vertical-align: middle;
   border-radius: 50%;
   width: 60px;
   height: 60px;
   animation: spin 2s linear infinite;
+}
+
+.animeLeft {
+  transform: translateX(-20px);
+  opacity: 0;
+  animation: animeLeft 1s forwards;
+}
+
+@keyframes animeLeft {
+  to {
+    transform: initial;
+    opacity: initial;
+  }
 }
 
 @keyframes spin {

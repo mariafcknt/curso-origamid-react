@@ -18,7 +18,7 @@ function Produtos() {
   if (produtos === null) return <p className="loading"></p>
 
   return (
-    <div>
+    <div className="animeLeft">
       <div className="produtos-container">
         {produtos.map((p) => (
           <NavLink key={p.id} className="produto-card" to={'produto/' + p.id}>
@@ -28,7 +28,7 @@ function Produtos() {
           </NavLink>
         ))}
       </div>
-      <p>Alguns direitos reservados</p>
+      <p className="footer">Alguns direitos reservados.</p>
     </div>
   )
 }
